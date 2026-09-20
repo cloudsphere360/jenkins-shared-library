@@ -1,3 +1,3 @@
 def call() {
-  chechout scm
+  checkout scm
 }
