@@ -1,3 +1,4 @@
-def call() {
-  sh 'docker build -t cloudsphere360/cloudsphere360:1.0 .'
+// Define function
+def call(String ProjectName, String ImageTag, String DockerHubUser){
+  sh "docker build -t ${DockerHubUser}/${ProjectName}:${ImageTag} ."
 }
