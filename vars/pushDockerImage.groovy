@@ -1,4 +1,4 @@
-def call() {
+def call(String ProjectName, String ImageTag, String DockerHubUser) {
     withCredentials([
         usernamePassword(
             credentialsId: 'dockerhub-credentials',
@@ -6,10 +6,11 @@ def call() {
             passwordVariable: 'DOCKER_PASSWORD'
         )
     ]) {
-        sh '''
-            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-            docker push cloudsphere360/cloudsphere360:1.0
+        sh """
+            set -eu
+            echo "\$DOCKER_PASSWORD" | docker login -u "\$DOCKER_USERNAME" --password-stdin
+            docker push ${DockerHubUser}/${ProjectName}:${ImageTag}
             docker logout
-        '''
+        """
     }
 }
